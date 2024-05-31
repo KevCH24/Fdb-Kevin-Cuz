@@ -19,12 +19,55 @@ CREATE TABLE IF NOT EXISTS Empleado (
 
 CREATE TABLE IF NOT EXISTS Telefono (
     id_telefono INT PRIMARY KEY AUTO_INCREMENT,
+    id_marca int REFERENCES Marca(id_marca),
+    id_modelo int REFERENCES Modelo(id_modelo),
     marca VARCHAR(50) NOT NULL,
     modelo VARCHAR(50) NOT NULL,
     almac VARCHAR(10) NOT NULL,
     compania_o_liberado VARCHAR(50) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL
 );
+
+alter Table telefono drop COLUMN marca;
+alter table telefono drop COLUMN modelo; 
+ALTER Table telefono add COLUMN id_marca int REFERENCES marca(id_marca);
+ALTER TABLE telefono add COLUMN id_modelo int REFERENCES modelo(id_modelo) ;
+update telefono set id_marca = 10 where id_telefono = 10;
+
+CREATE TABLE if not exists modelo(
+    id_modelo int PRIMARY KEY AUTO_INCREMENT,
+    modelo VARCHAR (50) NOT NULL
+); 
+CREATE TABLE IF NOT EXISTS Marca (
+    id_marca INT PRIMARY KEY AUTO_INCREMENT,
+    marca VARCHAR(50) NOT NULL
+);
+UPDATE telefono set id_modelo = 3 where id_telefono=3;
+
+INSERT INTO Marca (marca) VALUES
+    ('Samsung'),
+    ('Apple'),
+    ('Google'),
+    ('OnePlus'),
+    ('Sony'),
+    ('Huawei'),
+    ('Xiaomi'),
+    ('Oppo'),
+    ('Nokia'),
+    ('Motorola');
+
+INSERT INTO Modelo (modelo) VALUES
+('Galaxy S20'),
+('iPhone 12'),
+('Pixel 5'),
+('8T'),
+('Xperia 5 II'),
+('P40 Pro'),
+('Mi 10'),
+('Find X2'),
+('8.3 5G'),
+('Edge+')
+;
 
 CREATE TABLE IF NOT EXISTS Cliente_Telefono (
     idCliente INT,
